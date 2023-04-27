@@ -1,12 +1,14 @@
 import React from 'react';
 import Navbar from '../compents/Navbar';
-import ListPopuler from '../compents/ListPopuler';
+import Hero from '../compents/Hero';
+import Footer from '../compents/Footer';
 
 export default function HomePage() {
   return (
     <>
       <Navbar />
-      <ListPopuler />
+      <Hero />
+      <Footer />
     </>
   );
 }
