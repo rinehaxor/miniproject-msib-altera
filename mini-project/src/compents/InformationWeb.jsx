@@ -1,12 +1,72 @@
 import React from 'react';
-
+import information from '../assets/information.png';
+import internet from '../assets/internet.png';
+import search from '../assets/search.png';
 export default function InformationWeb() {
   return (
     <>
-      <div className=" flex flex-nowrap h-48 bg-gradient-to-r from-blue-500 via-purple-600 to-pink-500 w-full text-center text-white">
-        <div className="w-26 text-2xl  ml-5 pt-5">Website informasi film dapat diakses dengan mudah melalui internet</div>
-        <div className="w-26 text-2xl pt-5">menyediakan informasi lengkap mengenai film yang ingin kita tonton</div>
-        <div className="w-26 text-2xl mr-2 pt-5">mencari film yang ingin ditonton melalui pencarian yang disediakan.</div>
+      <div className="flex bg-gradient-to-r from-blue-500 via-purple-600 to-pink-500 ">
+        <div className="flex-auto w-1/2">
+          <div className="relative flex flex-col items-center justify-center h-screen ">
+            <div className=" mx-auto px-4">
+              <div className="w-full md:w-2/3 lg:w-1/2 mx-auto text-center pr-5">
+                <h1 className="text-4xl md:text-6xl font-bold text-white mb-4">Mudah Akses</h1>
+                <p className="text-2xl text-white mb-8">Website informasi film dapat diakses dengan mudah melalui internet, kapanpun dan di mana pun kita berada.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="flex-auto w-1/2">
+          <div className="relative flex flex-col items-center justify-center h-screen">
+            <div className=" mx-auto px-4">
+              <div className="w-full md:w-2/3 lg:w-1/2 mx-auto pl-5">
+                <img src={internet} alt="Contoh Gambar" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="flex ">
+        <div className="flex-auto w-1/2">
+          <div className="relative flex flex-col items-center justify-center h-screen">
+            <div className=" mx-auto px-4">
+              <div className="w-full md:w-2/3 lg:w-1/2 mx-auto pl-5">
+                <img src={information} alt="Contoh Gambar" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="flex-auto w-1/2">
+          <div className="relative flex flex-col items-center justify-center h-screen ">
+            <div className=" mx-auto px-4">
+              <div className="w-full md:w-2/3 lg:w-1/2 mx-auto text-center pr-5">
+                <h1 className="text-4xl md:text-6xl font-bold mb-4">Informasi Movie</h1>
+                <p className="text-2xl  mb-8">Menyediakan informasi lengkap: Website informasi film menyediakan informasi lengkap mengenai film yang ingin kita tonton, mulai dari sinopsis, pemain, sutradara, .</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="flex bg-gradient-to-r from-blue-500 via-purple-600 to-pink-500 ">
+        <div className="flex-auto w-1/2">
+          <div className="relative flex flex-col items-center justify-center h-screen ">
+            <div className=" mx-auto px-4">
+              <div className="w-full md:w-2/3 lg:w-1/2 mx-auto text-center pr-5">
+                <h1 className="text-4xl md:text-6xl font-bold text-white mb-4">Mencari Movie</h1>
+                <p className="text-2xl text-white mb-8">Memudahkan dalam mencari film: Kita dapat mencari film yang ingin ditonton melalui fitur pencarian yang disediakan.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="flex-auto w-1/2">
+          <div className="relative flex flex-col items-center justify-center h-screen">
+            <div className=" mx-auto px-4">
+              <div className="w-full md:w-2/3 lg:w-1/2 mx-auto pl-5">
+                <img src={search} alt="Contoh Gambar" />
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </>
   );
