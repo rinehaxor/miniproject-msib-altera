@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Modal from 'react-modal';
-import Navbar from './Navbar';
+import Nav from './Navbar';
 
 const MovieList = () => {
   const [movies, setMovies] = useState([]);
@@ -94,7 +94,7 @@ const MovieList = () => {
 
   return (
     <>
-      <Navbar />
+      <Nav />
 
       <div className="flex bg-gradient-to-r from-blue-500 via-purple-600 to-pink-500 h-96 min-h-screen items-center">
         <div className="container mx-auto">
