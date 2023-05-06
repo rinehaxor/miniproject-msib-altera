@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { getAuth, createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
+import { getAuth, createUserWithEmailAndPassword, updateProfile, signOut } from 'firebase/auth';
 
 import { Button, Label, TextInput } from 'flowbite-react';
 import { useNavigate } from 'react-router-dom';
