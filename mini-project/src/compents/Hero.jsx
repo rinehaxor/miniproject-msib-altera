@@ -1,6 +1,7 @@
 import heroImage from '../assets/hero-image.png';
 import React, { useState, useEffect } from 'react';
 import InformationWeb from './InformationWeb';
+import { Link } from 'react-router-dom';
 
 export default function Hero() {
   const [movies, setMovies] = useState([]);
@@ -35,8 +36,8 @@ export default function Hero() {
 
   return (
     <>
-      <div className="flex bg-gradient-to-r from-blue-500 via-purple-600 to-pink-500 ">
-        <div className="flex-auto w-1/2">
+      <div className="flex bg-gradient-to-r from-blue-500 via-purple-600 to-pink-500">
+        <div className="flex-auto w-full md:w-1/2">
           <div className="relative flex flex-col items-center justify-center h-screen">
             <div className="container mx-auto px-4">
               <div className="w-full md:w-2/3 lg:w-1/2 mx-auto pl-5">
@@ -45,15 +46,15 @@ export default function Hero() {
             </div>
           </div>
         </div>
-        <div className="flex-auto w-1/2">
-          <div className="relative flex flex-col items-center justify-center h-screen ">
+        <div className="flex-auto w-full md:w-1/2">
+          <div className="relative flex flex-col items-center justify-center h-screen">
             <div className="container mx-auto px-4">
               <div className="w-full md:w-2/3 lg:w-1/2 mx-auto text-center pr-5">
-                <h1 className="text-4xl md:text-6xl font-bold text-white mb-4">Temukan Film Terbaikmu</h1>
-                <p className="text-2xl text-white mb-8">Cari dan temukan berbagai film favorit Anda di sini, mulai dari film lama hingga film terbaru.</p>
-                <a to="/movies" className="inline-flex items-center justify-center px-6 py-3 bg-white text-blue-500 font-semibold rounded-lg">
+                <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold text-white mb-4">Temukan Film Terbaikmu</h1>
+                <p className="text-xl sm:text-2xl text-white mb-8">Cari dan temukan berbagai film favorit Anda di sini, mulai dari film lama hingga film terbaru.</p>
+                <Link to="/search" className="inline-flex items-center justify-center px-6 py-3 bg-white text-blue-500 font-semibold rounded-lg">
                   Lihat Koleksi Film
-                </a>
+                </Link>
               </div>
             </div>
           </div>
@@ -77,6 +78,7 @@ export default function Hero() {
           ))}
         </div>
       </div>
+
       <InformationWeb />
     </>
   );
