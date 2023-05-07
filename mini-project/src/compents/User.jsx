@@ -8,14 +8,21 @@ import { useForm } from 'react-hook-form';
 import { Table, Alert } from 'flowbite-react';
 import heroUser from '../assets/user.png';
 import Wave from './Wave';
+import { atom, useAtom } from 'jotai';
+
+const usersAtom = atom([]);
+const forEditAtom = atom(false);
+const showAlertAtom = atom(false);
+const searchQueryAtom = atom('');
+const movieListAtom = atom([]);
 
 export default function User() {
-  const [users, setUsers] = useState([]);
-  const [forEdit, setForEdit] = useState(false);
+  const [users, setUsers] = useAtom(usersAtom);
+  const [forEdit, setForEdit] = useAtom(forEditAtom);
   const [currentUser, setCurrentUser] = useState(null);
-  const [searchQuery, setSearchQuery] = useState('');
-  const [movieList, setMovieList] = useState([]);
-  const [showAlert, setShowAlert] = useState(false);
+  const [showAlert, setShowAlert] = useAtom(showAlertAtom);
+  const [searchQuery, setSearchQuery] = useAtom(searchQueryAtom);
+  const [movieList, setMovieList] = useAtom(movieListAtom);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {

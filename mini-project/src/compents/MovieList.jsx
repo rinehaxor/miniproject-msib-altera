@@ -1,20 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Modal from 'react-modal';
-import Nav from './Navbar';
 import Wave from './Wave';
+import { atom, useAtom } from 'jotai';
+
+const movieListAtom = atom({
+  movies: [],
+  currentPage: 1,
+  totalPages: 1,
+  searchQuery: '',
+  searchYear: '',
+  details: [],
+  plotType: 'short',
+  modalVisible: false,
+  selectedMovieIndex: null,
+  hasSearched: false,
+});
 
 const MovieList = () => {
-  const [movies, setMovies] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
-  const [searchQuery, setSearchQuery] = useState('');
-  const [searchYear, setSearchYear] = useState('');
-  const [details, setDetails] = useState([]);
-  const [plotType, setPlotType] = useState('short');
-  const [modalVisible, setModalVisible] = useState(false);
-  const [selectedMovieIndex, setSelectedMovieIndex] = useState(null);
-  const [hasSearched, setHasSearched] = useState(false);
+  const [state, setState] = useAtom(movieListAtom);
 
   const fetchData = async (page, searchQuery, searchYear) => {
     try {
@@ -60,8 +64,9 @@ const MovieList = () => {
   };
 
   useEffect(() => {
-    fetchData(currentPage, searchQuery);
-  }, [currentPage]);
+    fetchData(state.currentPage, state.searchQuery);
+  }, [state.currentPage]);
+
   useEffect(() => {
     Modal.setAppElement('#root');
   }, []);
