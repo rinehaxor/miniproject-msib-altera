@@ -10,6 +10,7 @@ import { useAuth } from './hook/useAuth';
 import { Navigate } from 'react-router-dom';
 import { AuthProvider } from './hook/useAuth';
 import UserPage from './pages/UserPage';
+import SearchPage from './pages/SearchPage';
 
 function App() {
   return (
@@ -18,7 +19,7 @@ function App() {
         <div className="App">
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="/search" element={<MovieList />} />
+            <Route path="/search" element={<SearchPage />} />
             <Route path="/user" element={<ProtectedUser />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
@@ -32,7 +33,7 @@ function App() {
 
 function ProtectedUser() {
   const { currentUser } = useAuth();
-  return currentUser ? <User /> : <Navigate to="/login" replace />;
+  return currentUser ? <UserPage /> : <Navigate to="/login" replace />;
 }
 
 export default App;

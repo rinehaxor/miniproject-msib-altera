@@ -101,8 +101,6 @@ const MovieList = () => {
 
   return (
     <>
-      <Nav />
-
       <div className="flex bg-gradient-to-r from-blue-500  to-pink-500 h-96 min-h-screen items-center" style={{ height: 650 }}>
         <div className="container mx-auto ">
           <div className="w-full md:w-2/3 lg:w-1/2 mx-auto">

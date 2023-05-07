@@ -66,34 +66,37 @@ export default function User() {
     rekomendasi: false,
   };
 
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors },
+  } = useForm({
+    defaultValues: defaultField,
+  });
+
   const [field, setField] = useState(defaultField);
 
   const handleChangeField = (e) => {
-    setField({
-      ...field,
-      [e.target.name]: e.target.value,
-    });
-  };
-  const handleCheck = (e) => {
-    setField({
-      ...field,
-      rekomendasi: e.target.checked,
-    });
+    setValue(e.target.name, e.target.value);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleCheck = (e) => {
+    setValue('rekomendasi', e.target.checked);
+  };
+
+  const onSubmit = (data) => {
     if (forEdit) {
       const userDocRef = docRef(db, `users/${currentUser.uid}/user/${field.id}`);
-      updateDoc(userDocRef, field).then(() => {
+      updateDoc(userDocRef, data).then(() => {
         getData();
-        setField(defaultField);
+        setValue(defaultField);
         setForEdit(false);
       });
     } else {
-      addDoc(userRef, field).then(() => {
+      addDoc(userRef, data).then(() => {
         getData();
-        setField(defaultField);
+        setValue(defaultField);
       });
     }
   };
@@ -137,6 +140,7 @@ export default function User() {
   };
 
   const handleMovieClick = (movieTitle) => {
+    setValue('namaFilm', movieTitle);
     setField({
       ...field,
       namaFilm: movieTitle,
@@ -172,7 +176,7 @@ export default function User() {
       <Wave />
       <div className="">
         <h1 className="text-3xl text-center font-bold">Tulis Catatan di Sini</h1>
-        <form onSubmit={handleSubmit} className="px-10 space-y-5" style={{ paddingLeft: 50, paddingRight: 50 }}>
+        <form onSubmit={handleSubmit(onSubmit)} className="px-10 space-y-5" style={{ paddingLeft: 50, paddingRight: 50 }}>
           <div className="relative">
             <label htmlFor="namaFilm" className="block text-sm font-medium text-gray-700 pb-1">
               Nama Film
@@ -195,25 +199,24 @@ export default function User() {
               </ul>
             )}
           </div>
-
           <div>
             <label htmlFor="ulasan" className="block text-sm font-medium text-gray-700 pb-1">
               Ulasan
             </label>
             <textarea
               id="ulasan"
-              name="ulasan"
+              {...register('ulasan', { required: true })}
               placeholder="ulasan"
-              value={field.ulasan}
               onChange={handleChangeField}
               className="w-full py-2 px-4 border border-gray-300 rounded-md placeholder-gray-500 focus:outline-none focus:border-blue-500"
             />
+            {errors.ulasan && <p className="text-red-500">Ulasan harus diisi</p>}
           </div>
           <div className="flex items-center space-x-2">
-            <input id="rekomendasi" name="rekomendasi" type="checkbox" placeholder="rekomendasi" value={field.rekomendasi} onChange={handleCheck} className="focus:outline-none" />
             <label htmlFor="rekomendasi" className="text-sm font-medium text-gray-700">
-              Rekomendasi
+              Apakah dapat Rekomendasikan?
             </label>
+            <input id="rekomendasi" {...register('rekomendasi')} type="checkbox" placeholder="rekomendasi" onChange={handleCheck} className="focus:outline-none" />
           </div>
           <div>
             <label htmlFor="tanggal_nonton" className="block text-sm font-medium text-gray-700 pb-1">
@@ -221,13 +224,13 @@ export default function User() {
             </label>
             <input
               id="tanggal_nonton"
-              name="tanggal_nonton"
+              {...register('tanggal_nonton', { required: true })}
               type="date"
               placeholder="tanggal nonton"
-              value={field.tanggal_nonton}
               onChange={handleChangeField}
               className="py-2 px-4 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
             />
+            {errors.tanggal_nonton && <p className="text-red-500">Tanggal Nonton harus diisi</p>}
           </div>
 
           <button type="submit" className="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50">
@@ -244,7 +247,7 @@ export default function User() {
             </span>
           </Alert>
         )}
-        <Table>
+        <Table className="mb-5">
           <Table.Head>
             <Table.HeadCell>NO</Table.HeadCell>
             <Table.HeadCell>Nama Movie</Table.HeadCell>
@@ -262,8 +265,9 @@ export default function User() {
                   {index + 1}
                 </Table.Cell>
                 <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">{pengguna.namaFilm}</Table.Cell>
-                <Table.Cell className="w-10">{pengguna.ulasan}</Table.Cell>
                 <Table.Cell>{pengguna.rekomendasi ? 'Rekomendasikan' : 'Tidak di rekomendasikan'}</Table.Cell>
+                <Table.Cell className="w-30 whitespace-nowrap font-medium text-gray-900 dark:text-white">{pengguna.ulasan}</Table.Cell>
+
                 <Table.Cell>{pengguna.tanggal_nonton}</Table.Cell>
                 <Table.Cell>
                   <div className="flex flex-warp">
