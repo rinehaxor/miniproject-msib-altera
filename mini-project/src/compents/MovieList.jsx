@@ -140,8 +140,8 @@ const MovieList = () => {
       <div className="flex flex-wrap justify-center items-center mt-10">
         {movies && movies.length > 0
           ? movies?.map((movie, index) => (
-              <div key={movie.imdbID} className="m-2 text-center">
-                <div className="flex flex-col h-full w-xl bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+              <div key={movie.imdbID} className="p-5 text-center">
+                <div className="flex flex-col h-full w-60 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 m-2">
                   <img className="mx-auto w-44 h-72 object-cover rounded-t-lg" src={movie.Poster} alt={movie.Title} />
                   <div className="p-5 flex-1">
                     <h5 className="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white"> {movie.Title.slice(0, 10)}...</h5>
@@ -157,10 +157,12 @@ const MovieList = () => {
                           <img src={movies[selectedMovieIndex].Poster} alt={movies[selectedMovieIndex].Title} className="h-2/3 w-96 object-cover" />
                           <div className="bg-white bg-opacity-70 p-4">
                             <h3 className="font-bold text-gray-800 text-3xl">Title: {movies[selectedMovieIndex].Title}</h3>
-                            <h3 className="mb-3 font-normal text-gray-700 mt-3 dark:text-gray-400">Year: {movies[selectedMovieIndex].Year}</h3>
-                            <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">{details[selectedMovieIndex]?.genre}</p>
-                            <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">Sutradara: {details[selectedMovieIndex]?.director}</p>
-                            <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">Pemain: {details[selectedMovieIndex]?.actors}</p>
+                            <h3 className="mb-3  text-gray-700 mt-3  text-xl font-semibold dark:text-gray-400">Year: {movies[selectedMovieIndex].Year}</h3>
+
+                            <p className="mb-3  text-gray-700 mt-3  text-xl font-semibold dark:text-gray-400">{details[selectedMovieIndex]?.genre}</p>
+                            <p className="mb-3  text-gray-700 mt-3  text-xl font-semibold dark:text-gray-400">{details[selectedMovieIndex]?.Runtime}</p>
+                            <p className="mb-3 font-normal text-gray-700 dark:text-gray-400"> {details[selectedMovieIndex]?.director}</p>
+                            <p className="mb-3 font-normal text-gray-700 dark:text-gray-400"> {details[selectedMovieIndex]?.actors}</p>
                             <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">{details[selectedMovieIndex]?.plot}</p>
                           </div>
                         </div>
