@@ -131,7 +131,7 @@ export default function User() {
         const response = await axios.get('https://www.omdbapi.com/', {
           params: {
             s: searchQuery,
-            apikey: '831be77e',
+            apikey: 'cb9eebfe',
           },
         });
 

@@ -23,7 +23,7 @@ const MovieList = () => {
         params: {
           s: searchQuery,
           y: searchYear,
-          apikey: '831be77e',
+          apikey: 'cb9eebfe',
           page,
         },
       });
@@ -31,7 +31,7 @@ const MovieList = () => {
       setMovies(response.data.Search);
 
       if (response.data.totalResults) {
-        setTotalPages(Math.ceil(response.data.totalResults / 8));
+        setTotalPages(Math.ceil(response.data.totalResults / 10));
       }
 
       const movieDetails = response.data.Search
@@ -41,7 +41,7 @@ const MovieList = () => {
                 params: {
                   i: movie.imdbID,
 
-                  apikey: '831be77e',
+                  apikey: 'cb9eebfe',
                   plot: plotType,
                 },
               })
@@ -66,12 +66,16 @@ const MovieList = () => {
     }
   };
 
-  useEffect(() => {
+  const handleSearch = () => {
+    setHasSearched(true);
+    setCurrentPage(1);
+    fetchData(1, searchQuery, searchYear);
+  };
+
+  const handlePlotTypeChange = (e) => {
+    setPlotType(e.target.value);
     fetchData(currentPage, searchQuery);
-  }, [currentPage]);
-  useEffect(() => {
-    Modal.setAppElement('#root');
-  }, []);
+  };
 
   const handlePrevPage = () => {
     if (currentPage > 1) {
@@ -86,16 +90,13 @@ const MovieList = () => {
       fetchData(currentPage + 1, searchQuery);
     }
   };
-
-  const handleSearch = () => {
-    setHasSearched(true);
-    setCurrentPage(1);
-    fetchData(1, searchQuery, searchYear);
-  };
-  const handlePlotTypeChange = (e) => {
-    setPlotType(e.target.value);
+  useEffect(() => {
     fetchData(currentPage, searchQuery);
-  };
+  }, [currentPage]);
+
+  useEffect(() => {
+    Modal.setAppElement('#root');
+  }, []);
 
   const onClick = (index) => {
     setSelectedMovieIndex(index);
