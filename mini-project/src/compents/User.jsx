@@ -90,6 +90,10 @@ export default function User() {
 
   const handleCheck = (e) => {
     setValue('rekomendasi', e.target.checked);
+    setField({
+      ...field,
+      rekomendasi: e.target.checked,
+    });
   };
 
   const onSubmit = (data) => {
@@ -111,6 +115,10 @@ export default function User() {
   const prepareEdit = (user) => {
     setField(user);
     setForEdit(true);
+    setValue('namaFilm', user.namaFilm);
+    setValue('ulasan', user.ulasan);
+    setValue('tanggal_nonton', user.tanggal_nonton);
+    setValue('rekomendasi', user.rekomendasi);
   };
 
   const deleteUser = (id) => {
@@ -192,7 +200,7 @@ export default function User() {
               id="namaFilm"
               name="namaFilm"
               placeholder="Cari film"
-              value={searchQuery}
+              value={forEdit ? field.namaFilm : searchQuery}
               onChange={handleSearch}
               className="w-full py-2 px-4 border border-gray-300 rounded-md placeholder-gray-500 focus:outline-none focus:border-blue-500"
             />
@@ -211,6 +219,7 @@ export default function User() {
               Ulasan
             </label>
             <textarea
+              defaultValue={field.ulasan}
               id="ulasan"
               {...register('ulasan', { required: true })}
               placeholder="ulasan"
@@ -223,7 +232,7 @@ export default function User() {
             <label htmlFor="rekomendasi" className="text-sm font-medium text-gray-700">
               Apakah dapat Rekomendasikan?
             </label>
-            <input id="rekomendasi" {...register('rekomendasi')} type="checkbox" placeholder="rekomendasi" onChange={handleCheck} className="focus:outline-none" />
+            <input id="rekomendasi" {...register('rekomendasi')} type="checkbox" checked={field.rekomendasi} onClick={handleCheck} className="focus:outline-none" />
           </div>
           <div>
             <label htmlFor="tanggal_nonton" className="block text-sm font-medium text-gray-700 pb-1">
@@ -233,6 +242,7 @@ export default function User() {
               id="tanggal_nonton"
               {...register('tanggal_nonton', { required: true })}
               type="date"
+              defaultValue={field.tanggal_nonton}
               placeholder="tanggal nonton"
               onChange={handleChangeField}
               className="py-2 px-4 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
